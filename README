@@ -1,0 +1,159 @@
+
+                                    Colortail
+                                       0.3
+
+
+------
+This software is Copyright (C) 2009 by Joakim Andersson 
+<ja@joakimandersson.se>. I accept no responsibility for any damage this 
+software may or may not do to your system - you use it completely at your 
+own risk. This software comes under the GPL license. See the COPYING file 
+for full legal details.
+------
+
+This file contains:
+
+  1. Overview
+  2. Background
+  3. Features
+  4. Installing
+  5. Usage
+  6. Standard disclaimer
+  7. Bugs
+  8. Thanks
+
+
+1. OVERVIEW
+
+Colortail works like tail but can optionally read one or more config files
+where it's specified which patterns results in which colors.
+
+Colortail uses regular expressions (see regex(7)) to determine which lines and 
+parts of lines to print in which colors.
+
+
+2. BACKGROUND
+
+My thoughts about colortail started when I was running a 
+tail -f -q /var/log/foo /var/log/bar in the background of my irc session and I
+wanted to quickly see if something strange was going on. I wanted different
+lines in different colors so it's easy to see what is happening. I searched on
+the internet but didn't find any program that did what I wanted. So I started
+to code on colortail. Version 0.1 didn't use regular expressions but instead 
+had a somewhat DOSish config format with '*' and '?'. In 0.2 I changed to
+regular expressions. After 0.2 I didn't do much with colortail for a long
+while, but then I got a patch, that made it possible to print just parts of
+lines in a color, I got some new inspiration but because the code was a big
+mess I decided to do a rewrite in C++. I like the modularity that the C++
+classes "forces" one to do. And because I've been brainwashed with Java in
+school I find the object view the most natural.
+
+
+3. FEATURES
+
+OK, so what is this colortail thing good for?
+
+I can't say that colortail is a substitute for tail, not yet anyway. Right
+now colortail lacks some major features the tail has. But I'll add this 
+features in the next releases.
+
+BUT, colortail has something that tail lacks. The ability to do colored output.
+How may this come in handy? Well, it's mostly useful then looking at log files
+(it's what I use it for anyway, it may very well be other uses for it as well,
+if you have found something that colortail is useful for please send a mail 
+telling me of it). In the case of looking at log files I have configured
+colortail to do this:
+(standard log file made my syslog (/var/log/messages)):
+
+(I split the line)
+
+Aug  4 23:14:53 morrdusk kernel: Packet log: ppp-in DENY ppp0 PROTO=6 
+[-1--] [--2---] [--3---] [--4--] [---5-----] [-----6--------] [--5--]
+
+xxx.xx.xxx.xxx:xxxxx xxx.xxx.x.xxx:xx L=44 S=0x00 I=58022 F=0x4000 T=53
+[-----7------][--5-] [------7-----][----------------5-----------------]
+
+The above is colorized as this:
+The [-1-] part is in magenta
+The [-2-] part is in cyan
+The [-3-] part is in green
+The [-4-] part is in yellow
+The [-5-] part is in brightblue
+The [-6-] part is in brightred
+The [-7-] part is in brightyellow
+
+
+It may be hard to imagine how it looks but I think it looks better than the
+all white output from tail. And I like to have all the more serious things 
+colored in bright red color. It then only takes a glance to see that
+something has happened and one can take a closer look at that line. I also have
+all ip addresses in bright yellow so that they are easy to see.
+
+This is in no way hardcoded, all is controlled in the configuration files. 
+That can be one configuration file for each tail file then tailing more than 
+one file or if only one configuration file is given it's used as a global
+configuration file, affecting all the tail files.
+
+
+4. INSTALLING
+
+Colortail should work on most unix system that have g++. I have developed it
+on a Redhat linux system. 
+I have integrated a bsd patch I got for 0.2 but I may have added some 
+strange code in the rewrite that bsd doesn't like.
+There shouldn't be a problem on other systems, but if you have to change
+something to get it to work on your system, please send me a patch.
+
+To install colortail this should be enough:
+From the toplevel colortail source tree directory:
+  ./configure
+  make
+  su
+  make install
+
+After that you may want to copy and edit the example config files to some
+other place. I have them in ~/.colortail/
+
+If you don't have the GNU regex library, it can be found at
+ftp.funet.fi/pub/gnu/prep/regex/
+
+
+5. USAGE
+
+Most options are easily understanded. The only somewhat strange option is
+the -k option that specifies the config files so colortail knows what should
+be printed in which color. 
+
+If only one config file and one or more tail files is given the config file 
+is treated as a global one, i.e.
+
+colortail -k conf.global file1 file2 file3
+
+Multiple config files are separated with a , and if one tail file shouldn't
+have a config file just leave it blank, i.e.
+
+colortail -k conf.file1,,conf.file3 file1 file2 file3
+
+
+6. STANDARD DISCLAIMER
+
+The author don't take any responsibility for any damage this program may do.
+I'm doing this in my spare time. If you don't like this program don't use it.
+
+
+7. BUGS
+
+Please read the BUGS file. There I describe a very annoying bug that exists
+in tail too. I haven't yet found anyway to fix this.
+It you have a solution to that problem or if you have found another bug,
+please send a mail to pt98jan@student.hk-r.se
+
+
+8. THANKS
+
+Thanks to:
+Joey Hess for multicolored lines patch.
+Nic Bellamy for FreeBSD and OpenBSD compatability patch.
+Edward Betts for making debian packages.
+
+

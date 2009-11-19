@@ -1,0 +1,11 @@
+--([ For 0.4 ])----
+- Reading from standard input when no FILE, or when FILE is -
+- Make an informative man page
+- Support -45 as -n 45
+- Output the last N bytes
+- Remove -v and only have --version for version
+- Support +N as orint beginning with the Nth item from the start of each file.
+- Support b for 512, k for 1024 and m for 1048576 as suffix for bytes.
+- make -kf work. -fk works but -kf doesn't.
+
+
