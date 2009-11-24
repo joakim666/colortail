@@ -1,6 +1,11 @@
+2009-11-20 Joakim Andersson <ja@joakimandersson.se>
+
+	* Released version 0.3.2
+	* Fixed a few places where a faulty string pointer could be returned.
+
 2009-11-19 Joakim Andersson <ja@joakimandersson.se>
 
-	 * Released version 3.0.1
+	 * Released version 0.3.1
 	 * Corrected errors on 64-bit platforms
 	 * Merged gcc3 patch
 

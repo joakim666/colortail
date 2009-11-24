@@ -155,5 +155,5 @@ Thanks to:
 Joey Hess for multicolored lines patch.
 Nic Bellamy for FreeBSD and OpenBSD compatability patch.
 Edward Betts for making debian packages.
-
+Justin Piszcz for extensive 64-bit testning.
 

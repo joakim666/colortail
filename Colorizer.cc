@@ -194,7 +194,7 @@ string Colorizer::colorize(const char *str)
       }
 
       // return the new string
-      return newstr.str().c_str();
+      return newstr.str();
    }
 
    // did we find submatches?
@@ -240,11 +240,12 @@ string Colorizer::colorize(const char *str)
       //newstr << endl << ends;
       newstr << ends;
       	 
-      return newstr.str().c_str();
+      return newstr.str();
       
    }
    
       
    // should never get here
-   return NULL;
+	string empty = "";
+   	return empty;
 }
