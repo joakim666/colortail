@@ -125,7 +125,7 @@ void TailFile::print(int n)
       }
       
       // read line
-      char *ret = fgets(buf, MAX_CHARS_READ, m_file);
+      char *ret = fgets(buf, MAX_CHARS_READ-1, m_file);
       
       // read more than zero chars
       if (ret != NULL)
