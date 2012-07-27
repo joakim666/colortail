@@ -34,6 +34,8 @@ TailFile::TailFile()
    m_colorizer = NULL;
    m_position = 0;
    m_follow_buffer = NULL;
+   memset(&m_file_stats, 0, sizeof(struct stat));
+   reopening = 0;
 }
 
 TailFile::~TailFile()
@@ -57,6 +59,25 @@ TailFile::~TailFile()
    {
       delete m_follow_buffer;
    }
+}
+
+int TailFile::reopen()
+{
+  if (m_file)
+    fclose(m_file);
+  m_file = NULL;
+
+  if (m_follow_buffer)
+    delete m_follow_buffer;
+  m_follow_buffer = NULL;
+  m_position = 0;
+  memset(&m_file_stats, 0, sizeof(struct stat));
+  reopening = 1;
+  char *tmp = m_filename;
+  int ret = open(m_filename, m_colorizer);
+  delete tmp;
+  reopening = 0;
+  return ret;
 }
 
 int TailFile::open(char *filename, Colorizer *colorizer)
@@ -92,7 +113,7 @@ int TailFile::open(char *filename, Colorizer *colorizer)
 
       // set the saved stream position used to see if the file has
       // changed size to the end of the file
-      m_position = end_of_file_position();
+      m_position = reopening ? 0 : end_of_file_position();
    }
    return 0;
 }
@@ -267,7 +288,7 @@ long TailFile::end_of_file_position()
    // doesn't modify the current position
    
    // check if file isn't open
-   if (m_file == NULL)
+  if (m_file == NULL && reopen())
    {
       // no file open, return 0
       return 0;
@@ -276,13 +297,25 @@ long TailFile::end_of_file_position()
    struct stat file_stats;
 
    // get the stats for the current file
-   int ret = fstat(fileno(m_file), &file_stats);
+   int ret = stat(m_filename, &file_stats);
 
    if (ret != 0)
    {
-      // some error, return 0
-      return 0;
+     // some error, return 0
+     return 0;
    }
+
+   if (m_file_stats.st_ino && file_stats.st_ino != m_file_stats.st_ino)
+     {
+       if (!reopen())
+	 {
+	   int ret = stat(m_filename, &file_stats);
+	   if (ret)
+	     return 0;
+	 }
+     }
+
+   memcpy(&m_file_stats, &file_stats, sizeof(struct stat));
 
    // return the size
    return file_stats.st_size;
