@@ -99,7 +99,12 @@ int TailFile::open(char *filename, Colorizer *colorizer)
       strcpy(m_filename, filename);
 
       // tries to open the file
-      m_file = fopen(filename, "r");
+      if (strcmp (filename, "-") == 0)
+      {
+         m_file = stdin;
+      }
+      else
+         m_file = fopen(filename, "r");
 
       if (m_file == NULL)
       {

@@ -3,6 +3,8 @@
 	* Bumped version number to 0.3.4
 	* Merged feature to reopen a disappeared file, i.e. due to log rotation,
 	  made by Ben Kibbey <bjk@luxsci.net>.
+	* Merged patch to accept "-" as filename to read from STDIN made
+	  by Michal Maruska mmaruska@gmail.com
 
 2010-06-02 Joakim Andersson <ja@joakimandersson.se>
 
