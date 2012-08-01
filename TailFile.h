@@ -24,6 +24,7 @@
 
 #include <stdio.h>
 #include <sstream>
+#include <sys/stat.h>
 
 #define MAX_CHARS_READ 1024
 
@@ -41,6 +42,9 @@ class TailFile
    long m_position;
    // the follow buffer, used in follow_print
    std::ostringstream *m_follow_buffer;
+   // to detect a changed inode for reopening
+   struct stat m_file_stats;
+   int reopening;
 
    // private methods
    void find_position(int n);
@@ -55,6 +59,9 @@ class TailFile
    // opens the file
    int open(char *filename, Colorizer *colorizer);
 
+   // reopen the file when the inode has changed (log rotation)
+   int reopen();
+   
    // prints last n rows
    void print(int n);
 
