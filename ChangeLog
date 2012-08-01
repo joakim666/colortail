@@ -1,11 +1,13 @@
 2012-08-01 Joakim Andersson <ja@joakimandersson.se>
 
 	* Bumped version number to 0.3.4
+	* Merged feature to reopen a disappeared file, i.e. due to log rotation,
+	  made by Ben Kibbey <bjk@luxsci.net>.
 
 2010-06-02 Joakim Andersson <ja@joakimandersson.se>
 
 	* Released version 0.3.3
-	* Fixed stupid off by one error in TailFile.cc that caused a segfault 
+	* Fixed stupid off by one error in TailFile.cc that caused a segfault
 	  if a line in the tailed file was longer that 1024 characters.
 
   Reported by: Bill Pollifrone and Tom Dickson
