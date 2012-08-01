@@ -38,6 +38,7 @@ void Usage::print()
    cout << "Usage: colortail [OPTION]... [FILE]..." << endl;
    cout << "Print last 10 lines of each FILE to standard output." << endl;
    cout << "With more than one FILE, precede each with a header giving the file name." << endl;
+   cout << "Use '-' as file name to read from stdin." << endl;
    cout << endl;
    cout << "  -f, --follow\t\t\toutput appended data as the file grows" << endl;
    cout << "  -h, --help\t\t\tdisplay this help and exit" << endl;
@@ -52,4 +53,4 @@ void Usage::print()
    cout << "Report bugs to ja@joakimandersson.se" << endl;
 }
 
-   
+
