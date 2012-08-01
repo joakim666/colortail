@@ -5,6 +5,10 @@
 	  made by Ben Kibbey <bjk@luxsci.net>.
 	* Merged patch to accept "-" as filename to read from STDIN made
 	  by Michal Maruska mmaruska@gmail.com
+	* Merged patch to check for configuration file in
+	  ~/.colortail/conf.colortail and if that doesn't exist check in
+	  /etc/colortail/conf.colortail if no -k argument was passed on the command
+	  line. Feature made by Jess Portnoy kernel01@gmail.com
 
 2010-06-02 Joakim Andersson <ja@joakimandersson.se>
 

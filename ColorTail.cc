@@ -20,11 +20,14 @@
 #include <iostream>
 #include <assert.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "ColorTail.h"
 #include "TailFile.h"
 #include "OptionsParser.h"
 #include "Colorizer.h"
+
 
 using namespace std;
 
@@ -66,7 +69,7 @@ int ColorTail::start(int argc, char **argv)
    Options *options = optParser.parse(argc, argv);
 
    assert (options != NULL);
-   
+
    // the options has been stripped from argc and argv, just the
    // files to tail and the program namn left
 
@@ -80,7 +83,7 @@ int ColorTail::start(int argc, char **argv)
       TailFile *new_tailfile = new TailFile();
 
       Colorizer *colorizer = NULL;
-      
+
       // check if colors
       if (options->color)
       {
@@ -105,7 +108,7 @@ int ColorTail::start(int argc, char **argv)
 	       cout << "colortail: Couldn't open global color config file. Skipping colors for the " << argv[i] << " file." << endl;
                // open the tailfile without colorizer
 	       new_tailfile->open(argv[i], NULL);
-	    }  
+	    }
 	 }
 	 else
 	 {
@@ -124,9 +127,21 @@ int ColorTail::start(int argc, char **argv)
 	    else
 	    {
 	       // no config file
-	       // no error message because it can be cfgfile1,,cfgfile2 
-	       // open the tailfile without colorizer
-	       new_tailfile->open(argv[i], NULL);
+	       // no error message because it can be cfgfile1,,cfgfile2
+         // check for configuration file in home dir and global
+         string cade = getenv("HOME");
+         cade += "/.colortail/conf.colortail";
+         if(!fopen(cade.c_str(), "r")){
+           // open failed
+           cade = "/etc/colortail/conf.colortail";
+           if(!fopen(cade.c_str(), "r")){
+             cade.clear();
+           }
+         }
+		char* ccade = new char[cade.length()+1];
+		strcpy(ccade, cade.c_str());
+		colorizer = new Colorizer(ccade);
+		new_tailfile->open(argv[i], colorizer);
 	    }
 	 }
       }
@@ -144,7 +159,7 @@ int ColorTail::start(int argc, char **argv)
       // increase the tailfile counter
       tailfile_counter++;
    }
-   
+
    // check if not follow-mode
    if (options->follow == 0)
    {
@@ -153,7 +168,7 @@ int ColorTail::start(int argc, char **argv)
       // make an iterator
       ListIterator<TailFile*> itr(m_tailfiles);
       TailFile *current_file;
-      
+
       // iterate through the file list
       for (itr.init() ; !itr ; ++itr)
       {
@@ -164,8 +179,8 @@ int ColorTail::start(int argc, char **argv)
 	 {
 	    // print filename
 	    current_file->printFilename();
-	 }   
-	 
+	 }
+
 	 // print the specified number of rows
 	 current_file->print(options->rows);
       }
@@ -193,7 +208,7 @@ int ColorTail::start(int argc, char **argv)
 	       current_file->printFilename();
 	    }
 	 }
-	 
+
 	 // print the specified number of rows
 	 current_file->print(options->rows);
       }
