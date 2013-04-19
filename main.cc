@@ -50,6 +50,7 @@ int main(int argc, char **argv)
 // callback function for signals
 void clean_up(int i)
 {
+   cout << ANSI_RESET_STR << endl << ends;
    if (colortail)
       delete colortail;
    exit(1);
