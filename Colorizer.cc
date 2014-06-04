@@ -170,7 +170,7 @@ string Colorizer::colorize(const char *str)
 	    }
 
 	    // write ansi reset str and a newline
-	    newstr << ANSI_RESET_STR << endl << ends;
+	    newstr << ANSI_RESET_STR << endl ;
 	    // return the new string
 	    return newstr.str();
 	 }
@@ -185,12 +185,12 @@ string Colorizer::colorize(const char *str)
       // check if str ends in '\n'
       if (str[strlen(str)-1] == '\n')
       {
-	 newstr << str << ends;
+	 newstr << str ;
       }
       else
       {
 	 // doesn't end in '\n'
-	 newstr << str << endl << ends;
+	 newstr << str << endl ;
       }
 
       // return the new string
@@ -242,7 +242,7 @@ string Colorizer::colorize(const char *str)
       
       // write newline and null
       //newstr << endl << ends;
-      newstr << ends;
+      // newstr << ends;
       	 
       return newstr.str();
       
