@@ -201,6 +201,7 @@ string Colorizer::colorize(const char *str)
    if (submatch == 1)
    {
       int last_was_reset_str = 1;
+      string  last_color_was;
       // iiterate through all the characters
       int l = strlen(str);
       for (i = 0 ; i < l ; i++)
@@ -214,15 +215,18 @@ string Colorizer::colorize(const char *str)
 	       newstr << ANSI_RESET_STR;
 	       // remeber that we wrote it
 	       last_was_reset_str = 1;
+	       last_color_was = string();
 	    }
 	 }
-	 else
+	 else if ( last_color_was != color[i] )
 	 {
 	    // a color for this position
 	    // reset ansi reset string checker
 	    last_was_reset_str = 0;
 	    // write color
 	    newstr << color[i];
+	    // save color
+	    last_color_was = color[i];
 	 }
 
 	 // write current character
