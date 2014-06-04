@@ -230,7 +230,17 @@ string Colorizer::colorize(const char *str)
 	 }
 
 	 // write current character
-	 newstr.put(str[i]);
+	 if ( i == l-1 && str[i] == '\n' )
+	 {
+	    // check if this is the last char and if that a \n
+	    // so we can avoid reseting the color after a newline
+	    newstr << ANSI_RESET_STR;
+	    newstr.put(str[i]);
+	    last_was_reset_str = 1;
+	 }
+	 else {
+	    newstr.put(str[i]);
+	 }
       }
       
       // check if last wasn't the ansi reset string
