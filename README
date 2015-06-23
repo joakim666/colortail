@@ -4,8 +4,8 @@
 
 
 ------
-This software is Copyright (C) 2009 by Joakim Andersson 
-<ja@joakimandersson.se>. I accept no responsibility for any damage this 
+This software is Copyright (C) 2009 by Joakim Ek 
+<joakim@pjek.se>. I accept no responsibility for any damage this 
 software may or may not do to your system - you use it completely at your 
 own risk. This software comes under the GPL license. See the COPYING file 
 for full legal details.
@@ -146,7 +146,7 @@ I'm doing this in my spare time. If you don't like this program don't use it.
 Please read the BUGS file. There I describe a very annoying bug that exists
 in tail too. I haven't yet found anyway to fix this.
 It you have a solution to that problem or if you have found another bug,
-please send a mail to pt98jan@student.hk-r.se
+please send a mail to joakim@pjek.se
 
 
 8. THANKS

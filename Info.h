@@ -1,6 +1,6 @@
 /*
     colortail -- output last part of file(s) in color.
-    Copyright (C) 1999  Joakim Andersson <pt98jan@student.hk-r.se>
+    Copyright (C) 1999  Joakim Ek <joakim@pjek.se>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -1,6 +1,6 @@
 /*
     colortail -- output last part of file(s) in color.
-    Copyright (C) 2009  Joakim Andersson <ja@joakimandersson.se>
+    Copyright (C) 2009  Joakim Ek <joakim@pjek.se>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ void Usage::print()
    cout << "  -q, --quiet, --silent\t\tnever output headers giving file names" << endl;
    cout << "  -v, --version\t\t\toutput version information and exit" << endl;
    cout << endl;
-   cout << "Report bugs to ja@joakimandersson.se" << endl;
+   cout << "Report bugs to joakim@pjek.se" << endl;
 }
 
 

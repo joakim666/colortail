@@ -1,4 +1,4 @@
-2012-08-01 Joakim Andersson <ja@joakimandersson.se>
+2012-08-01 Joakim Ek <joakim@pjek.se>
 
 	* Bumped version number to 0.3.4
 	* Merged feature to reopen a disappeared file, i.e. due to log rotation,
@@ -10,7 +10,7 @@
 	  /etc/colortail/conf.colortail if no -k argument was passed on the command
 	  line. Feature made by Jess Portnoy kernel01@gmail.com
 
-2010-06-02 Joakim Andersson <ja@joakimandersson.se>
+2010-06-02 Joakim Ek <joakim@pjek.se>
 
 	* Released version 0.3.3
 	* Fixed stupid off by one error in TailFile.cc that caused a segfault
@@ -18,12 +18,12 @@
 
   Reported by: Bill Pollifrone and Tom Dickson
 
-2009-11-20 Joakim Andersson <ja@joakimandersson.se>
+2009-11-20 Joakim Ek <joakim@pjek.se>
 
 	* Released version 0.3.2
 	* Fixed a few places where a faulty string pointer could be returned.
 
-2009-11-19 Joakim Andersson <ja@joakimandersson.se>
+2009-11-19 Joakim Ek <joakim@pjek.se>
 
 	 * Released version 0.3.1
 	 * Corrected errors on 64-bit platforms
@@ -31,7 +31,7 @@
 
 <erased old ChangeLog then the rewrite started>
 
-1999-03-12 Joakim Andersson <pt98jan@student.hk-r.se>
+1999-03-12 Joakim Ek <joakim@pjek.se>
  * 
  
  

@@ -1,6 +1,6 @@
 /*
     colortail -- output last part of file(s) in color.
-    Copyright (C) 1999  Joakim Andersson <pt98jan@student.hk-r.se>
+    Copyright (C) 1999  Joakim Ek <joakim@pjek.se>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ Info::~Info()
 void Info::print()
 {
    cout << "Colortail version <" << COLORTAIL_VERSION << ">" << endl;
-   cout << "Copyright (C) 2009 Joakim Andersson <ja@joakimandersson.se>" << endl;
+   cout << "Copyright (C) 2009 Joakim Ek <joakim@pjek.se>" << endl;
    cout << "Colortail comes with ABSOLUTELY NO WARRANTY; for details see the COPYING file." << endl;
    cout << "This is free software, and you are welcome to redistribute it" << endl;
    cout << "under certain conditions; see the COPYING file for details." << endl;
