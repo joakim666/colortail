@@ -310,7 +310,9 @@ long TailFile::end_of_file_position()
      return 0;
    }
 
-   if (m_file_stats.st_ino && file_stats.st_ino != m_file_stats.st_ino)
+   if ((m_file_stats.st_ino && file_stats.st_ino != m_file_stats.st_ino) ||
+       (m_file_stats.st_ino && file_stats.st_ino == m_file_stats.st_ino &&
+        m_file_stats.st_size > file_stats.st_size))
      {
        if (!reopen())
 	 {
