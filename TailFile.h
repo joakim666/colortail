@@ -61,7 +61,7 @@ class TailFile
 
    // reopen the file when the inode has changed (log rotation)
    int reopen();
-   
+
    // prints last n rows
    void print(int n);
 
