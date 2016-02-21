@@ -36,7 +36,6 @@ int main(int argc, char **argv)
    // setup signal catchers
    signal (SIGINT,  clean_up);
    signal (SIGHUP,  clean_up);
-   signal (SIGKILL, clean_up);
 
    // start the program
    int ret = colortail->start(argc, argv);
