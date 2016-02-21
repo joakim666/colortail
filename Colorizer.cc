@@ -119,7 +119,7 @@ string Colorizer::colorize(const char *str)
       current = itr();
 
       // check for match
-      if (regexec(current->m_preg, str, 10, pmatch, 0) == 0)
+      if (regexec(&current->m_preg, str, 10, pmatch, 0) == 0)
       {
 	 // TODO: check for callback function
 	 // TODO: call callback function
