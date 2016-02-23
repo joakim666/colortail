@@ -30,8 +30,8 @@ using namespace std;
 
 SearchData::SearchData()
 {
+   memset (&m_preg, 0, sizeof (m_preg));
    // default constructor
-   m_preg = NULL;
    m_ansi_color_code = NULL;
    m_pf = NULL;
    m_param_to_callback_fkn = NULL;
@@ -39,15 +39,11 @@ SearchData::SearchData()
 
 SearchData::~SearchData()
 {
-   if (m_preg)
-   {
-      // is allocated with malloc
-      free(m_preg);
-   }
+   regfree (&m_preg);
 
    if (m_ansi_color_code)
    {
-      delete m_ansi_color_code;
+      delete[] m_ansi_color_code;
    }
 
    if (m_param_to_callback_fkn)
@@ -81,7 +77,7 @@ CfgFileParser::~CfgFileParser()
    free_items();
    if (m_filename)
    {
-      delete m_filename;
+      delete[] m_filename;
    }
 }
 
@@ -128,7 +124,7 @@ char* CfgFileParser::read_line()
    if (m_infile.gcount() <= 0)
    {
       // found EOF
-      delete str;
+      delete[] str;
       return NULL;
    }
 
@@ -179,7 +175,7 @@ int CfgFileParser::read_item()
 	    if (regexp[0] == '}')
 	    {
 	       // free mem
-	       delete regexp;
+	       delete[] regexp;
 	       // stop looping
 	       break;
 	    }
@@ -193,13 +189,8 @@ int CfgFileParser::read_item()
 	    // set color
 	    searchdata->set_color(color);
 	    
-	    // allocate memory to the pattern storage buffer
-	    searchdata->m_preg = (regex_t*) malloc(sizeof(regex_t));
-	    // check allocation
-	    assert (searchdata->m_preg != NULL);
-	    
 	    // make compiled pattern buffer
-	    if (regcomp(searchdata->m_preg, regexp, REG_EXTENDED) != 0)
+	    if (regcomp(&searchdata->m_preg, regexp, REG_EXTENDED) != 0)
 	    {
 	       // failed to make compiled reg exp pattern
 	       cout << "colortail: Failed to make compiled reg exp pattern for "
@@ -220,7 +211,7 @@ int CfgFileParser::read_item()
 	       nr_items_added++;
 	    }
 	    // free mem
-	    delete regexp;
+	    delete[] regexp;
 	 }
 	 else
 	 {
@@ -230,6 +221,8 @@ int CfgFileParser::read_item()
 	 }
       }
    }
+
+   delete[] color;
    return nr_items_added;
 }
 
@@ -364,22 +357,22 @@ char* CfgFileParser::read_color()
 		    << m_filename << " at line " << m_line << endl;
 
 	       // free mem
-	       delete tmp;
-	       delete color;
+	       delete[] tmp;
+	       delete[] color;
 	       // error, return NULL
 	       return NULL;
 	    }
 	    else
 	    {
 	       // free mem
-	       delete tmp;
+	       delete[] tmp;
 	       // found color
 	       return color;
 	    }
 	 }
-	 // free memory for read line
-	 delete tmp;
       }
+      // free memory for read line
+      delete[] tmp;
    }
    // should never execute this
    return NULL;
@@ -414,7 +407,7 @@ int CfgFileParser::read_left()
 	 if (tmp[0] == '{')
 	 {
 	    // free mem
-	    delete tmp;
+	    delete[] tmp;
 
 	    return 0;
 	 }
@@ -425,14 +418,14 @@ int CfgFileParser::read_left()
 		 << tmp[0] << "' in config file: " << m_filename
 		 << " at line " << m_line << "." << endl;
 	    // free mem
-	    delete tmp;
+	    delete[] tmp;
 
 	    return 1;
 	 }
       }
 
       // free mem
-      delete tmp;
+      delete[] tmp;
    }
 
    // should never get this far
@@ -474,7 +467,7 @@ char* CfgFileParser::read_regexp()
       // this is a empty line or a comment, skip it
 
       // free mem
-      delete tmp;
+      delete[] tmp;
    }
 
    // should never get this far
@@ -513,7 +506,7 @@ int CfgFileParser::parse(const char *filename)
    // save filename of config file
    if (m_filename)
    {
-      delete m_filename;
+      delete[] m_filename;
    }
 
    m_filename = new char[strlen(filename) + 1];

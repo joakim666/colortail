@@ -42,7 +42,7 @@ TailFile::~TailFile()
 {
    if (m_filename)
    {
-      delete m_filename;
+      delete[] m_filename;
    }
    
    if (m_file)

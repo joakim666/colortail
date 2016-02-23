@@ -47,7 +47,7 @@ class SearchData
    ~SearchData();
    void set_color(char *color);
    
-   regex_t *m_preg;               // pattern storage buffer
+   regex_t m_preg;                // pattern storage buffer
    char *m_ansi_color_code;       // color for row if match
    void (*m_pf)(char*);           // callback fkn for action
    char *m_param_to_callback_fkn; // parameters to callback fkn
