@@ -105,7 +105,7 @@ int ColorTail::start(int argc, char **argv)
 	    {
 	       // no config file
 	       // print error
-	       cout << "colortail: Couldn't open global color config file. Skipping colors for the " << argv[i] << " file." << endl;
+	       cerr << "colortail: Couldn't open global color config file. Skipping colors for the " << argv[i] << " file." << endl;
                // open the tailfile without colorizer
 	       new_tailfile->open(argv[i], NULL);
 	    }
