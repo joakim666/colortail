@@ -89,7 +89,7 @@ int TailFile::open(char *filename, Colorizer *colorizer)
 
    if (filename == NULL)
    {
-      cout << "colortail: Filename was NULL" << endl;
+      cerr << "colortail: Filename was NULL" << endl;
       return 1;
    }
    else
@@ -109,7 +109,7 @@ int TailFile::open(char *filename, Colorizer *colorizer)
       if (m_file == NULL)
       {
 	 // open failed
-	 cout << "colortail: Failed to open file: " << filename << endl;
+	 cerr << "colortail: Failed to open file: " << filename << endl;
 	 return 1;
       }
 

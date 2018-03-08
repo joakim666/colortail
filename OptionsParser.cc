@@ -225,14 +225,14 @@ Options* OptionsParser::parse(int argc, char **argv)
 	    
 	    // TODO: fix to handle -45 that means -n 45
 
-	    cout << "colortail: invalid option -- " << (char)c << endl;
-	    cout << "Try 'colortail --help' for more information." << endl;
+	    cerr << "colortail: invalid option -- " << (char)c << endl;
+	    cerr << "Try 'colortail --help' for more information." << endl;
 	    
 	    break;
 	    
 	 default:
 
-	    cout << "Unrecognized option " << (char)c << endl;
+	    cerr << "Unrecognized option " << (char)c << endl;
 
 	    // print usage
 	    usage.print();
